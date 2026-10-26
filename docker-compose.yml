@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: backend/Dockerfile
     environment:
-      CORS_ORIGINS: http://localhost:3000
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
       MAX_UPLOAD_MB: "5"
     ports:
       - "8000:8000"

@@ -21,7 +21,10 @@ const TABS: Array<{ id: Tab; label: string }> = [
 const STATUSES: Status[] = ["auto", "learned", "user", "needs_review", "duplicate", "not_spending"];
 
 function inTab(tx: Transaction, tab: Tab): boolean {
-  return tab === "all" ? true : tx.status === tab;
+  if (tab === "all") return true;
+  // Duplicates also wait for review, so they show up in both tabs.
+  if (tab === "needs_review") return tx.needs_review;
+  return tx.status === tab;
 }
 
 function StatCard({
@@ -117,7 +120,8 @@ export function StatementView({
   const tabCounts = useMemo(() => {
     const counts: Record<Tab, number> = { all: txs.length, needs_review: 0, duplicate: 0, not_spending: 0 };
     for (const t of txs) {
-      if (t.status === "needs_review" || t.status === "duplicate" || t.status === "not_spending") counts[t.status]++;
+      if (t.needs_review) counts.needs_review++;
+      if (t.status === "duplicate" || t.status === "not_spending") counts[t.status]++;
     }
     return counts;
   }, [txs]);

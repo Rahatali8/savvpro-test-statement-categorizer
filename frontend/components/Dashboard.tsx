@@ -268,7 +268,7 @@ export function Dashboard() {
     }
   };
 
-  const reviewCount = statement ? statement.transactions.filter((t) => t.status === "needs_review").length : null;
+  const reviewCount = statement ? statement.transactions.filter((t) => t.needs_review).length : null;
   const header = HEADERS[view];
   const showUpload = view !== "rules";
 

@@ -38,6 +38,8 @@
 | 4 | The first rules made `JOES CAFE` → Meals (keyword `CAFE`, 75%), but the task says this exact merchant must go to Needs Review | Comparing the first classifier output against TASK.md | `CAFE`/`COFFEE` became *weak* keywords (50%), so the row goes to review with a "Meals" hint |
 | 5 | A test expected `BLUE DOOR STUDIO 22` to be the same merchant as `BLUE DOOR STUDIO`, but the normalizer keeps short numbers on purpose (`MICROSOFT 365`) | Failing test | The test was wrong, not the code; fixed the test input |
 | 6 | The plan put learned rules *after* special rules, so a user's fix of a "transfer" row would never stick | Design review while writing the brain | Learned rules (exact merchant) now run first; documented in DESIGN.md |
+| 7 | The frontend's Needs Review tab and sidebar badge said **7**, but the stat card said **8**: the UI left out the duplicate row, which also needs review | Looking at a screenshot of the running app | The tab now uses the `needs_review` flag, the same as the backend |
+| 8 | The skills `taste-skill` / `Impeccable` were not installed, so the agent did the critique and audit by hand against the same rubric, plus `npx impeccable detect` | The agent's own notes in `frontend/.design/` | Findings and fixes are logged in `frontend/.design/findings.md` (contrast, nested cards, tab a11y, mobile button) |
 | TODO | Add anything else you noticed while reviewing or clicking through the UI | | |
 
 ## Tokens
